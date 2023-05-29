@@ -1,0 +1,28 @@
+tasks = {}
+
+while True:
+    task_name = input("请输入任务名称（输入q结束）：")
+    if task_name == 'q':
+        break
+    
+    importance = input("请输入任务重要性（高/中/低）：")
+    
+    if importance not in ['高', '中', '低']:
+        print("无效的任务重要性，请重新输入。")
+        continue
+    
+    if importance not in tasks:
+        tasks[importance] = []
+        
+    tasks[importance].append(task_name)
+    
+for importance, task_list in sorted(tasks.items(), key=lambda x: len(x[1]), reverse=True):
+    print(importance + "重要性的任务数量为：" + str(len(task_list)))
+    print("任务列表：")
+    for task in task_list:
+        print("- " + task)
+    print("\n")
+    
+print("最高重要性等级为" + list(tasks.keys())[0] + "，包含以下任务：")
+for task in tasks[list(tasks.keys())[0]]:
+    print("- " + task)
